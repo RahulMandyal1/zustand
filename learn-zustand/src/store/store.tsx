@@ -2,21 +2,20 @@ import create from "zustand";
 
 interface counterState {
   count: number;
-  increaseCounter: () => any;
-  decreaseCounter: () => void;
+  increaseCounter: (num: number) => void;
+  decreaseCounter: (num: number) => void;
 }
 
 const useCounterStore = create<counterState>()((set) => ({
   count: 0,
-  increaseCounter: () =>
+  increaseCounter: (num) =>
     set((state) => ({
-      count: state.count + 1,
+      count: num ? state.count + num : state.count + 1,
     })),
-  decreaseCounter: () =>
+  decreaseCounter: (num) =>
     set((state) => ({
-      count: state.count - 1,
+      count: num ? state.count - num : state.count - 1,
     })),
 }));
 
 export default useCounterStore;
-
